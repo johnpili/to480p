@@ -1,0 +1,57 @@
+# IDE/Settings related stuff
+.idea
+.project
+.settings
+.vscode
+.history
+*.metadata/
+*.springBeans
+*.iml
+
+# GIN
+gin-bin
+
+# Logs
+logs
+*.log
+
+# Process IDS
+pids
+*.pid
+*.seed
+
+.DS_Store
+
+# SSL/TLS
+server.crt
+server.key
+
+# JSON files
+*.json
+
+# rice-box related stuff
+rice-box.go
+rice-box
+*rice-box.go
+
+target/
+bin/
+classes/
+screenshots/
+plugin-entities.jar
+*.gz
+*.tmp
+downloads/
+snm-mock/
+
+.recommenders/caches/identified-project-coordinates.json
+.recommenders/caches/manual-mappings.json
+
+Servers/Pivotal tc Server Developer Edition v4.0-config/catalina.policy
+Servers/Pivotal tc Server Developer Edition v4.0-config/catalina.properties
+Servers/Pivotal tc Server Developer Edition v4.0-config/context.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/jmxremote.access
+Servers/Pivotal tc Server Developer Edition v4.0-config/jmxremote.password
+Servers/Pivotal tc Server Developer Edition v4.0-config/server.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/tomcat-users.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/web.xml
