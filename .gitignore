@@ -26,9 +26,6 @@ pids
 server.crt
 server.key
 
-# JSON files
-*.json
-
 # rice-box related stuff
 rice-box.go
 rice-box
