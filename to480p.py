@@ -130,6 +130,16 @@ def delete_file(target_file):
     os.remove(target_file)
 
 
+def bulk_convert(target_directory, output_directory):
+    for root, dirs, files, root_fd in os.fwalk(target_directory):
+        p = root if root.endswith("/") else root + "/"
+        for file in files:
+            name, ext = os.path.splitext(file)
+            if ext.lower() == ".mp4" or ext.lower() == ".avi":
+                print(f"Processing {p + file} ...")
+                convert_to_480(p + file, output_directory)
+
+
 def convert_to_480(target_file, output_folder):
     generate_preset_json()
     pwd = os.getcwd()
@@ -146,22 +156,34 @@ def convert_to_480(target_file, output_folder):
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, "h:i:o:", ["help", "input=", "output="])
+        opts, args = getopt.getopt(argv, "h:i:d:o:",
+                                   ["help", "input=", "input-directory=", "output=", "output-directory="])
     except getopt.GetoptError:
-        print(f"{sys.argv[0]} --input <filename> --output <destination folder>")
+        print(f"{sys.argv[0]} --input <filename> --output-directory <destination folder>")
         sys.exit(2)
 
     input_file = ""
+    input_directory = ""
     output_folder = ""
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            print(f"{sys.argv[0]} --input <filename> --output <destination folder>")
+            print(f"{sys.argv[0]} --input <filename> --output-directory <destination folder>")
             sys.exit()
         elif opt in ("-i", "--input"):
             input_file = arg
-        elif opt in ("-o", "--output"):
+        elif opt in ("-d", "--input-directory"):
+            input_directory = arg
+        elif opt in ("-o", "--output", "--output-directory"):
             output_folder = arg
-    convert_to_480(input_file, output_folder)
+
+    if (len(input_file) == 0 and len(input_directory) == 0) or len(output_folder) == 0:
+        print(f"{sys.argv[0]} --input <filename> --output-directory <destination folder>")
+        sys.exit(2)
+
+    if len(input_directory) != 0:
+        bulk_convert(input_directory, output_folder)
+    elif len(input_file) != 0:
+        convert_to_480(input_file, output_folder)
 
 
 if __name__ == '__main__':
